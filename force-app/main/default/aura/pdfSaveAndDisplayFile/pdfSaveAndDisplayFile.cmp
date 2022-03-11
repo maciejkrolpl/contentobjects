@@ -1,0 +1,9 @@
+<aura:component implements="force:lightningQuickAction,force:hasRecordId" controller="FileController">
+    
+    <lightning:navigation aura:id="navService" />
+
+        <lightning:button variant="brand" label="Save in record library" title="Save in record library" onclick="{! c.handleSaveInRecord }" />
+    <lightning:button variant="brand" label="Save in PDFs library" title="Save in PDFs library" onclick="{! c.handleSaveInPdfs }" />
+
+
+</aura:component>

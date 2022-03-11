@@ -1,0 +1,17 @@
+<apex:page controller="AccountDetailsPdfController" renderAs="pdf" applyBodyTag="true" applyHtmlTag="true">
+
+    <h1>Account Data</h1>
+    <ul>
+        <li>Name: {!Account.Name}</li>
+        <li>Phone: {!Account.Phone}</li>
+        <li>Website: {!Account.Website}</li>
+        <li>Address: {!Account.BillingStreet}, {!Account.BillingCity}, {!Account.BillingCountry}</li>
+    </ul>
+    <h1>Contacts</h1>
+    <ul>
+        <apex:repeat value="{!Contacts}" var="contact">
+            <li>{!contact.Name}, {!contact.Phone}</li>
+        </apex:repeat>
+    </ul>
+
+</apex:page>
