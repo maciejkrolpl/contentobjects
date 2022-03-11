@@ -1,7 +1,7 @@
 @IsTest
 public class FileControllerTest{
     private static final String ACCOUNT_NAME = 'TestAccount';
-    private static final String LIBRARY_NAME = 'Account Pdfs';
+    private static final String LIBRARY_NAME = 'TestWorkspace';
     private static final String ADMIN_PERMISSION_TYPE = 'Admin';
     private static final String ADMIN_PROFILE_NAME = 'System Administrator';
     private static final String ADMIN_LASTNAME = 'Adminowski';
@@ -22,9 +22,10 @@ public class FileControllerTest{
             LanguageLocaleKey = 'en_US');
         insert admin;
 
-        ContentWorkspace workspace = [SELECT Id
-                                      FROM ContentWorkspace
-                                      WHERE Name = :LIBRARY_NAME];
+        ContentWorkspace workspace = new ContentWorkspace(
+            Name = LIBRARY_NAME
+        );
+        insert workspace;
 
         ContentWorkspacePermission adminPermission = [SELECT Id, Type
                                                       FROM ContentWorkspacePermission
@@ -37,6 +38,10 @@ public class FileControllerTest{
         insert member;
 
         System.runAs(admin){
+            PdfWorkspaceInfo__c info = new PdfWorkspaceInfo__c(
+                PdfWorkspaceId__c = workspace.Id
+            );
+            insert info;
 
             Account account = new Account(
                 Name = ACCOUNT_NAME, 
@@ -71,6 +76,8 @@ public class FileControllerTest{
         User admin = [SELECT Id
                       FROM User
                       WHERE Name = :ADMIN_LASTNAME];
+
+        
 
         Id newDocumentId;
         System.runAs(admin){

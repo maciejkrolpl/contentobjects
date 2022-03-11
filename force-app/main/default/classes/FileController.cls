@@ -1,10 +1,10 @@
 public class FileController{
-    private static final String LIBRARY_NAME = 'Account PDFs';
     @AuraEnabled
     public static String savePdfToContentVersion(Id recordId, Boolean saveToRecord){
         String name = SelectorService.selectAccountById(recordId).Name;
 
-        Id libraryId = SelectorService.selectContentWorkspaceByName(LIBRARY_NAME).Id;
+        PdfWorkspaceInfo__c workspaceInfo = [SELECT PdfWorkspaceId__c FROM PdfWorkspaceInfo__c];
+        Id libraryId = workspaceInfo.PdfWorkspaceId__c;
 
         PageReference page = Page.accountDetailsPdf;
         page.getParameters().put('id', recordId);
@@ -13,7 +13,8 @@ public class FileController{
         cv.PathOnClient = name + '.pdf';
         Id entityId = (saveToRecord==TRUE) ? recordId : libraryId;
 
-        if (Test.isRunningTest()){
+        // Methods defined as TestMethod do not support getContent call
+        if (Test.isRunningTest()){                            
             cv.VersionData = blob.valueOf('Unit.Test');
         } else{
             cv.VersionData = page.getContentAsPDF();
