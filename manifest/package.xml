@@ -16,10 +16,6 @@
 		<name>AuraDefinitionBundle</name>
 	</types>
 	<types>
-		<members>Account-Account Layout</members>
-		<name>Layout</name>
-	</types>
-	<types>
 		<members>Account.Save_PDF</members>
 		<name>QuickAction</name>
 	</types>
@@ -34,6 +30,14 @@
 	<types>
 		<members>PdfWorkspaceInfo__c</members>
 		<name>CustomObject</name>
+	</types>
+	<types>
+		<members>Content_Objects</members>
+		<name>CustomApplication</name>
+	</types>
+	<types>
+		<members>Account_Record_Page_ContentObject</members>
+		<name>FlexiPage</name>
 	</types>
 	<version>52.0</version>
 </Package>
